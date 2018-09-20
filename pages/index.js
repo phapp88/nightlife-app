@@ -31,6 +31,18 @@ class Index extends React.Component {
     this.getBarData = this.getBarData.bind(this);
   }
 
+  componentDidMount() {
+    try {
+      const bars = JSON.parse(localStorage.getItem('bars'));
+      if (bars !== null) {
+        this.setState({ bars });
+      }
+      localStorage.removeItem('bars');
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   async getBarData(location) {
     try {
       const res = await fetch(`/api/bars?location=${location}`);
@@ -70,7 +82,7 @@ class Index extends React.Component {
     const { bars } = this.state;
     return (
       <div className={classes.root}>
-        <NavBar isLoggedIn={username !== ''} />
+        <NavBar bars={bars} isLoggedIn={username !== ''} />
         <div className={classes.filler} />
         <Typography className={classes.title} variant="display2">
           Nightlife Coordination App
