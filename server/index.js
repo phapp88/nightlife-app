@@ -3,6 +3,7 @@ const connectMongo = require('connect-mongo');
 const dotenv = require('dotenv');
 const express = require('express');
 const fetch = require('isomorphic-unfetch');
+const helmet = require('helmet');
 const next = require('next');
 const session = require('express-session');
 
@@ -21,6 +22,7 @@ const wrap = fn => (...args) => fn(...args).catch(args[2]);
 app.prepare()
   .then(() => {
     express()
+      .use(helmet())
       .use(bodyParser.json())
       .use(bodyParser.urlencoded({ extended: true }))
       .use(session({
