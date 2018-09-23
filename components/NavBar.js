@@ -17,10 +17,10 @@ const styles = {
   },
 };
 
-const NavBar = ({ bars, classes, isLoggedIn }) => {
+const NavBar = ({ classes, isLoggedIn, state }) => {
   const handleClick = () => {
     try {
-      localStorage.setItem('bars', JSON.stringify(bars));
+      localStorage.setItem('state', JSON.stringify(state));
     } catch (err) {
       console.log(err);
     }
@@ -41,17 +41,21 @@ const NavBar = ({ bars, classes, isLoggedIn }) => {
 };
 
 NavBar.propTypes = {
-  bars: PropTypes.arrayOf(PropTypes.shape({
-    categories: PropTypes.arrayOf(PropTypes.object),
-    id: PropTypes.string,
-    imageUrl: PropTypes.string,
-    name: PropTypes.string,
-    peopleGoing: PropTypes.arrayOf(PropTypes.string),
-    price: PropTypes.string,
-    rating: PropTypes.number,
-    reviewCount: PropTypes.number,
-    url: PropTypes.string,
-  })).isRequired,
+  state: PropTypes.shape({
+    bars: PropTypes.arrayOf(PropTypes.shape({
+      categories: PropTypes.arrayOf(PropTypes.object),
+      id: PropTypes.string,
+      imageUrl: PropTypes.string,
+      name: PropTypes.string,
+      peopleGoing: PropTypes.arrayOf(PropTypes.string),
+      price: PropTypes.string,
+      rating: PropTypes.number,
+      reviewCount: PropTypes.number,
+      url: PropTypes.string,
+    })),
+    location: PropTypes.string,
+    offset: PropTypes.number,
+  }).isRequired,
   classes: PropTypes.shape({
     button: PropTypes.string,
     icon: PropTypes.string,

@@ -34,8 +34,8 @@ app.prepare()
       .use(passport.initialize())
       .use(passport.session())
       .get('/api/bars', wrap(async (req, res) => {
-        const { location } = req.query;
-        const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=bars&location=${location}&limit=12`;
+        const { location, offset } = req.query;
+        const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=bars&location=${location}&offset=${offset}&limit=12`;
         const yelpRes = await fetch(yelpUrl, {
           headers: { Authorization: `Bearer ${process.env.YELP_API_KEY}` },
         });
