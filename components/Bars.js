@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import BarActions from './BarActions';
 import BarContent from './BarContent';
 
-const styles = theme => ({
+const styles = (theme) => ({
   image: {
     objectFit: 'cover',
     height: '300px',
@@ -30,14 +30,16 @@ const styles = theme => ({
   },
 });
 
-const Bars = ({
-  bars, changeRsvp, classes, username,
-}) => (
+const Bars = ({ bars, changeRsvp, classes, username }) => (
   <div className={classes.root}>
-    {bars.map(bar => (
+    {bars.map((bar) => (
       <Card key={bar.id}>
         <a href={bar.url} target="_blank" rel="noreferrer noopener">
-          <CardMedia className={classes.image} component="img" image={bar.imageUrl} />
+          <CardMedia
+            className={classes.image}
+            component="img"
+            image={bar.imgSrc}
+          />
         </a>
         <BarContent bar={bar} />
         <BarActions bar={bar} changeRsvp={changeRsvp} username={username} />
@@ -47,17 +49,19 @@ const Bars = ({
 );
 
 Bars.propTypes = {
-  bars: PropTypes.arrayOf(PropTypes.shape({
-    categories: PropTypes.arrayOf(PropTypes.object),
-    id: PropTypes.string,
-    imageUrl: PropTypes.string,
-    name: PropTypes.string,
-    peopleGoing: PropTypes.arrayOf(PropTypes.string),
-    price: PropTypes.string,
-    rating: PropTypes.number,
-    reviewCount: PropTypes.number,
-    url: PropTypes.string,
-  })).isRequired,
+  bars: PropTypes.arrayOf(
+    PropTypes.shape({
+      categories: PropTypes.arrayOf(PropTypes.object),
+      id: PropTypes.string,
+      imgSrc: PropTypes.string,
+      name: PropTypes.string,
+      peopleGoing: PropTypes.arrayOf(PropTypes.string),
+      price: PropTypes.string,
+      rating: PropTypes.number,
+      reviewCount: PropTypes.number,
+      url: PropTypes.string,
+    })
+  ).isRequired,
   changeRsvp: PropTypes.func.isRequired,
   classes: PropTypes.shape({
     image: PropTypes.string,

@@ -1,5 +1,6 @@
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -33,7 +34,7 @@ const NavBar = ({ classes, isLoggedIn, state }) => {
       <Toolbar className={classes.toolbar} variant="dense">
         <Button className={classes.button} onClick={handleClick}>
           {isLoggedIn ? 'logout' : 'login'}
-          <i className={`fab fa-twitter ${classes.icon}`} />
+          <Icon className={`fab fa-twitter fa-1x ${classes.icon}`} />
         </Button>
       </Toolbar>
     </AppBar>
@@ -42,17 +43,19 @@ const NavBar = ({ classes, isLoggedIn, state }) => {
 
 NavBar.propTypes = {
   state: PropTypes.shape({
-    bars: PropTypes.arrayOf(PropTypes.shape({
-      categories: PropTypes.arrayOf(PropTypes.object),
-      id: PropTypes.string,
-      imageUrl: PropTypes.string,
-      name: PropTypes.string,
-      peopleGoing: PropTypes.arrayOf(PropTypes.string),
-      price: PropTypes.string,
-      rating: PropTypes.number,
-      reviewCount: PropTypes.number,
-      url: PropTypes.string,
-    })),
+    bars: PropTypes.arrayOf(
+      PropTypes.shape({
+        categories: PropTypes.arrayOf(PropTypes.object),
+        id: PropTypes.string,
+        imageUrl: PropTypes.string,
+        name: PropTypes.string,
+        peopleGoing: PropTypes.arrayOf(PropTypes.string),
+        price: PropTypes.string,
+        rating: PropTypes.number,
+        reviewCount: PropTypes.number,
+        url: PropTypes.string,
+      })
+    ),
     location: PropTypes.string,
     offset: PropTypes.number,
   }).isRequired,

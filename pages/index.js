@@ -60,7 +60,7 @@ class Index extends React.Component {
       window.scrollTo(0, 0);
       this.setState({ bars: json, location, offset });
     } catch (err) {
-      console.log(err); // TODO: handle error
+      console.log(err);
     }
   }
 
@@ -81,7 +81,7 @@ class Index extends React.Component {
         ),
       });
     } catch (err) {
-      console.log(err); // TODO: handle error
+      console.log(err);
     }
   }
 
