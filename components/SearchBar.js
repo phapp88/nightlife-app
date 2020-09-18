@@ -1,4 +1,5 @@
 import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Paper from '@material-ui/core/Paper';
@@ -7,7 +8,7 @@ import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const styles = (theme) => ({
   button: {
     [theme.breakpoints.down('xs')]: {
       display: 'none',
@@ -49,24 +50,33 @@ class SearchBar extends React.Component {
     const { classes } = this.props;
     const { location } = this.state;
     return (
-      <form autoComplete="off" className={classes.root} onSubmit={this.handleSubmit}>
+      <form
+        autoComplete="off"
+        className={classes.root}
+        onSubmit={this.handleSubmit}
+      >
         <Paper className={classes.paper}>
           <Toolbar className={classes.toolbar}>
             <Input
               disableUnderline
               onChange={this.handleChange}
               placeholder="Enter your city"
-              startAdornment={(
+              startAdornment={
                 <InputAdornment position="start">
-                  <i className="fas fa-search" />
+                  <Icon className="fas fa-search fa-1x" />
                 </InputAdornment>
-              )}
+              }
               name="location"
               value={location}
             />
           </Toolbar>
         </Paper>
-        <Button className={classes.button} color="primary" type="submit" variant="contained">
+        <Button
+          className={classes.button}
+          color="primary"
+          type="submit"
+          variant="contained"
+        >
           Search
         </Button>
       </form>

@@ -4,7 +4,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const styles = (theme) => ({
   infoRow1: {
     alignItems: 'center',
     display: 'flex',
@@ -33,28 +33,25 @@ const styles = theme => ({
 
 const BarContent = ({ bar, classes }) => (
   <CardContent>
-    <Typography component="h2" gutterBottom variant="headline">
+    <Typography component="h2" gutterBottom variant="h5">
       {bar.name}
     </Typography>
     <div className={classes.infoRow1}>
-      <img alt="rating" src={`/static/large_${bar.rating}.png`} />
+      <img alt="rating" src={`/large_${bar.rating}.png`} />
       <Typography className={`${classes.paragraph} ${classes.reviewCount}`}>
-        {bar.reviewCount}
-        {' '}
+        {bar.reviewCount}{' '}
         <span className={classes.reviewCountSpan}>reviews</span>
       </Typography>
     </div>
     <div>
       {bar.price !== '' && (
         <Typography className={`${classes.paragraph} ${classes.price}`}>
-          <span className={classes.priceSpan}>
-            {bar.price}
-          </span>
+          <span className={classes.priceSpan}>{bar.price}</span>
           {' \u00B7'}
         </Typography>
       )}
       <Typography className={classes.paragraph}>
-        {bar.categories.map(category => category.title).join(' \u00B7 ')}
+        {bar.categories.map((category) => category.title).join(' \u00B7 ')}
       </Typography>
     </div>
   </CardContent>

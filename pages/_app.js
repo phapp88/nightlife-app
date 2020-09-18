@@ -1,43 +1,52 @@
-import App, { Container } from 'next/app';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import JssProvider from 'react-jss/lib/JssProvider';
-import { MuiThemeProvider } from '@material-ui/core/styles';
 import React from 'react';
+import PropTypes from 'prop-types';
+import Head from 'next/head';
+import { loadCSS } from 'fg-loadcss';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from '../src/theme';
 
-import getPageContext from '../src/getPageContext';
+function MyApp(props) {
+  const { Component, pageProps } = props;
 
-class MyApp extends App {
-  constructor(props) {
-    super(props);
-    this.pageContext = getPageContext();
-  }
-
-  componentDidMount() {
+  React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
+    if (jssStyles) {
+      jssStyles.parentElement.removeChild(jssStyles);
     }
-  }
+  }, []);
 
-  render() {
-    const { Component, pageProps } = this.props;
-    return (
-      <Container>
-        <JssProvider
-          registry={this.pageContext.sheetsRegistry}
-          generateClassName={this.pageContext.generateClassName}
-        >
-          <MuiThemeProvider
-            theme={this.pageContext.theme}
-            sheetsManager={this.pageContext.sheetsManager}
-          >
-            <CssBaseline />
-            <Component pageContext={this.pageContext} {...pageProps} />
-          </MuiThemeProvider>
-        </JssProvider>
-      </Container>
+  React.useEffect(() => {
+    const node = loadCSS(
+      'https://use.fontawesome.com/releases/v5.12.0/css/all.css',
+      document.querySelector('#font-awesome-css')
     );
-  }
+
+    return () => {
+      node.parentNode.removeChild(node);
+    };
+  }, []);
+
+  return (
+    <React.Fragment>
+      <Head>
+        <title>Book Trading Club</title>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
+        />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </React.Fragment>
+  );
 }
+
+MyApp.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  pageProps: PropTypes.object.isRequired,
+};
 
 export default MyApp;

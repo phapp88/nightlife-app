@@ -50,7 +50,9 @@ class Index extends React.Component {
 
   async getBarData(location, offset = 0) {
     try {
-      const res = await fetch(`/api/bars?location=${location}&offset=${offset}`);
+      const res = await fetch(
+        `/api/bars?location=${location}&offset=${offset}`
+      );
       const json = await res.json();
       if (json.error) {
         throw new Error();
@@ -74,9 +76,9 @@ class Index extends React.Component {
       const json = await res.json();
       const { peopleGoing, yelpId: updatedBarId } = json.value;
       this.setState({
-        bars: bars.map(barr => (
+        bars: bars.map((barr) =>
           barr.id === updatedBarId ? { ...barr, peopleGoing } : barr
-        )),
+        ),
       });
     } catch (err) {
       console.log(err); // TODO: handle error
@@ -100,11 +102,12 @@ class Index extends React.Component {
       <div className={classes.root}>
         <NavBar isLoggedIn={username !== ''} state={this.state} />
         <div className={classes.filler} />
-        <Typography className={classes.title} variant="display2">
+        <Typography className={classes.title} variant="h3">
           Nightlife Coordination App
         </Typography>
-        <Typography paragraph variant="subheading">
-          Search your area for bars, see who&apos;s going where, and join in on the fun!
+        <Typography paragraph variant="subtitle1">
+          Search your area for bars, see who&apos;s going where, and join in on
+          the fun!
         </Typography>
         <SearchBar getBarData={this.getBarData} />
         <Bars bars={bars} changeRsvp={this.changeRsvp} username={username} />

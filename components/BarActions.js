@@ -6,34 +6,30 @@ import Switch from '@material-ui/core/Switch';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
-  label: {
-    position: 'relative',
-    right: '5px',
-    top: '1px',
-    width: '54px',
-  },
   link: {
     flex: 1,
   },
 };
 
-const BarActions = ({
-  bar, classes, changeRsvp, username,
-}) => (
+const BarActions = ({ bar, classes, changeRsvp, username }) => (
   <CardActions>
-    <a className={classes.link} href={bar.url} target="_blank" rel="noreferrer noopener">
-      <img alt="yelp logo" src="/static/Yelp_trademark_RGB_outline.png" width="70px" />
+    <a
+      className={classes.link}
+      href={bar.url}
+      target="_blank"
+      rel="noreferrer noopener"
+    >
+      <img alt="yelp logo" src="/Yelp_trademark_RGB_outline.png" width="70px" />
     </a>
     <FormControlLabel
-      classes={{ label: classes.label }}
-      control={(
+      control={
         <Switch
           checked={bar.peopleGoing.includes(username)}
           disabled={username === ''}
           color="primary"
           onChange={() => changeRsvp(bar)}
         />
-      )}
+      }
       label={`${bar.peopleGoing.length} GOING`}
     />
   </CardActions>
