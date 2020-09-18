@@ -30,7 +30,7 @@ function MyApp(props) {
   return (
     <React.Fragment>
       <Head>
-        <title>Book Trading Club</title>
+        <title>Nightlife App</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
