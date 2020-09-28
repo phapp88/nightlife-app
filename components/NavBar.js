@@ -54,7 +54,7 @@ NavBar.propTypes = {
         rating: PropTypes.number,
         reviewCount: PropTypes.number,
         url: PropTypes.string,
-      })
+      }),
     ),
     location: PropTypes.string,
     offset: PropTypes.number,

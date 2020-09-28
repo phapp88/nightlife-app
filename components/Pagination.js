@@ -43,10 +43,10 @@ Pagination.propTypes = {
       rating: PropTypes.number,
       reviewCount: PropTypes.number,
       url: PropTypes.string,
-    })
+    }),
   ).isRequired,
   classes: PropTypes.shape({
-    button: PropTypes.string,
+    fab: PropTypes.string,
   }).isRequired,
   handleBackBtnClick: PropTypes.func.isRequired,
   handleNextBtnClick: PropTypes.func.isRequired,

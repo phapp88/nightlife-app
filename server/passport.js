@@ -19,11 +19,16 @@ const verifyUser = async (token, tokenSecret, profile, done) => {
   }
 };
 
-passport.use(new TwitterStrategy({
-  consumerKey: process.env.TWITTER_CONSUMER_KEY,
-  consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-  callbackURL: process.env.TWITTER_CALLBACK_URL,
-}, verifyUser));
+passport.use(
+  new TwitterStrategy(
+    {
+      consumerKey: process.env.TWITTER_CONSUMER_KEY,
+      consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+      callbackURL: process.env.TWITTER_CALLBACK_URL,
+    },
+    verifyUser,
+  ),
+);
 
 // eslint-disable-next-line no-underscore-dangle
 passport.serializeUser((user, done) => done(null, user._id));

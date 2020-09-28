@@ -51,7 +51,7 @@ class Index extends React.Component {
   async getBarData(location, offset = 0) {
     try {
       const res = await fetch(
-        `/api/bars?location=${location}&offset=${offset}`
+        `/api/bars?location=${location}&offset=${offset}`,
       );
       const json = await res.json();
       if (json.error) {
@@ -77,7 +77,7 @@ class Index extends React.Component {
       const { peopleGoing, yelpId: updatedBarId } = json.value;
       this.setState({
         bars: bars.map((barr) =>
-          barr.id === updatedBarId ? { ...barr, peopleGoing } : barr
+          barr.id === updatedBarId ? { ...barr, peopleGoing } : barr,
         ),
       });
     } catch (err) {

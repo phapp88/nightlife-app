@@ -32,7 +32,7 @@ app
           secret: process.env.SESSION_SECRET,
           resave: false,
           saveUninitialized: false,
-        })
+        }),
       )
       .use(passport.initialize())
       .use(passport.session())
@@ -64,7 +64,7 @@ app
               const imgRes = await fetch(imageUrl);
               const imgBuf = await imgRes.buffer();
               const imgSrc = `data:imgage/jpeg;base64,${imgBuf.toString(
-                'base64'
+                'base64',
               )}`;
 
               return {
@@ -77,7 +77,7 @@ app
                 reviewCount,
                 url,
               };
-            })
+            }),
           );
           const barIds = yelpData.map((bar) => bar.id);
           const client = await connectToDb();
@@ -93,10 +93,10 @@ app
             let newData = mongoData.find((doc) => doc.yelpId === bar.id);
             if (!newData) newData = [];
             const { peopleGoing = [] } = newData;
-            return Object.assign({}, bar, { peopleGoing });
+            return { ...bar, peopleGoing };
           });
           return res.send(combinedData);
-        })
+        }),
       )
       .put(
         '/api/bars',
@@ -111,10 +111,10 @@ app
           const doc = await barsCollection.findOneAndUpdate(
             { yelpId },
             update,
-            { returnOriginal: false, upsert: true }
+            { returnOriginal: false, upsert: true },
           );
           res.send(doc);
-        })
+        }),
       )
       .get('/auth/twitter', passport.authenticate('twitter'))
       .get(
@@ -122,7 +122,7 @@ app
         passport.authenticate('twitter', {
           successRedirect: '/',
           failureRedirect: '/',
-        })
+        }),
       )
       .get('/logout', (req, res) => {
         req.logout();

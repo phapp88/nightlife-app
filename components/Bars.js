@@ -60,7 +60,7 @@ Bars.propTypes = {
       rating: PropTypes.number,
       reviewCount: PropTypes.number,
       url: PropTypes.string,
-    })
+    }),
   ).isRequired,
   changeRsvp: PropTypes.func.isRequired,
   classes: PropTypes.shape({
