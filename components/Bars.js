@@ -38,7 +38,7 @@ const Bars = ({ bars, changeRsvp, classes, username }) => (
           <CardMedia
             className={classes.image}
             component="img"
-            image={bar.imgSrc}
+            image={bar.imageUrl}
           />
         </a>
         <BarContent bar={bar} />
@@ -53,7 +53,7 @@ Bars.propTypes = {
     PropTypes.shape({
       categories: PropTypes.arrayOf(PropTypes.object),
       id: PropTypes.string,
-      imgSrc: PropTypes.string,
+      imageUrl: PropTypes.string,
       name: PropTypes.string,
       peopleGoing: PropTypes.arrayOf(PropTypes.string),
       price: PropTypes.string,

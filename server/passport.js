@@ -1,18 +1,14 @@
-const { ObjectID } = require('mongodb');
 const passport = require('passport');
 const { Strategy: TwitterStrategy } = require('passport-twitter');
-
-const connectToDb = require('./db');
+const db = require('./db');
 
 const verifyUser = async (token, tokenSecret, profile, done) => {
   const { displayName, username } = profile;
-  const client = await connectToDb();
-  const usersCollection = client.db('nightlife-app').collection('users');
   try {
-    const user = await usersCollection.findOne({ oauth_id: username });
+    const user = await db.getUserByUsername(username);
     if (user) return done(null, user);
     const newUser = { name: displayName, oauth_id: username };
-    await usersCollection.insertOne(newUser);
+    await db.insertUser(newUser);
     return done(null, newUser);
   } catch (err) {
     return done(err);
@@ -34,10 +30,8 @@ passport.use(
 passport.serializeUser((user, done) => done(null, user._id));
 
 passport.deserializeUser(async (id, done) => {
-  const client = await connectToDb();
-  const usersCollection = client.db('nightlife-app').collection('users');
   try {
-    const user = await usersCollection.findOne({ _id: ObjectID(id) });
+    const user = await db.getUserById(id);
     return done(null, user);
   } catch (err) {
     return done(err);
