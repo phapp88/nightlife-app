@@ -7,7 +7,7 @@ const connectToDb = require('./db');
 const verifyUser = async (token, tokenSecret, profile, done) => {
   const { displayName, username } = profile;
   const client = await connectToDb();
-  const usersCollection = client.db('nightlife1').collection('users');
+  const usersCollection = client.db('nightlife-app').collection('users');
   try {
     const user = await usersCollection.findOne({ oauth_id: username });
     if (user) return done(null, user);
@@ -35,7 +35,7 @@ passport.serializeUser((user, done) => done(null, user._id));
 
 passport.deserializeUser(async (id, done) => {
   const client = await connectToDb();
-  const usersCollection = client.db('nightlife1').collection('users');
+  const usersCollection = client.db('nightlife-app').collection('users');
   try {
     const user = await usersCollection.findOne({ _id: ObjectID(id) });
     return done(null, user);
